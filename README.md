@@ -1,5 +1,5 @@
 # Deepvue Aadhaar Offline e-KYC Android SDK
-![version](https://img.shields.io/badge/version-v0.4-blue)
+![version](https://img.shields.io/badge/version-v0.5-blue)
 
 Aadhaar Paperless Offline eKYC is a secure and shareable document which can be used by any Aadhaar holder for offline verification of identification. The Aadhaar Offline document can be obtained from the UIDAI website. This SDK provides a simple plugin to your mobile App which allows the user to seamlessly share their offline Aadhaar file with the service provider. 
 
