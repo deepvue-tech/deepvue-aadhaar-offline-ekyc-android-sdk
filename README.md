@@ -14,7 +14,7 @@ The Aadhaar Offline file will be validated for its digital signature and the KYC
 - [Permissions](#permissions)
 - [Quick Start](#quick-start)
 - [Aadhar Offline Result](#handling-the-result)
-
+- [Failure Status Codes](#failure-status-codes)
 - [Help](#help)
 
 ## Prerequisite
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             , DEEPVUE_AADHAR_OFFLINE_CLIENT_SEC = "ENTER_API_KEY_SEC_HERE";
    
     
-        private fun startKycWithoutFaceMatch() {
+    private fun startKycWithoutFaceMatch() {
         //for KYC without facematch
         AadharOfflineSDK.initialiseSDK(
             DEEPVUE_AADHAR_OFFLINE_API_BASE_URL,
@@ -133,7 +133,7 @@ Your activity must implement `AadharOfflineResultCallback` to receive the result
 
 ```java
     // ...
-    override fun onFailure() {
+    override fun onFailure(errorCode:Int) {
         Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show()
     }
 
@@ -144,7 +144,24 @@ Your activity must implement `AadharOfflineResultCallback` to receive the result
 ```
 
 ## DeepvueAadharOfflineResult
-The result is obtained through the `result` object 
+The result is obtained through the `result` object
+
+## Failure Status Codes
+Following error codes will be returned on the `onFailure` method of the callback
+
+| CODE | DESCRIPTION                  |
+| ---- | ---------------------------- |
+| 801  | SDK Invalid Credentials             |
+| 802  | Permission Denied       |
+| 803  | User Interrupted            |
+| 804  | No Internet Available |
+| 805  | Network Error         |
+| 806  | OTP Limit Exceeded       |
+| 807  | Mobile Number Not Linked to Aadhaar             |
+| 808  | File Download Failed 
+| 809  | File Upload Failed |
+| 810  | Face Match Failed            |
+| 404  | UIDAI Website Server Down            |
 
 ## Help
-For any queries/feedback, contact us at `help@deepvue.tech` 
+For any queries/feedback, contact us at `hello@deepvue.tech` 
