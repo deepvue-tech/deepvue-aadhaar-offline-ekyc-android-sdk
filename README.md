@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
 #### Handling the result
 
-Your activity must implement `AadharOfflineResultCallback` to receive the result.
+Your activity must implement `onKycSuccessResult` and `onFailure` to receive the result.
 
 ```java
     // ...
