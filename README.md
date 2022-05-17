@@ -58,9 +58,6 @@ dependencies {
 5. Copy below files and add to your `app` alongside `MainApplication.java` file
     - [OkycSdkHandler.java](https://github.com/deepvue-tech/deepvue-aadhaar-offline-ekyc-android-sdk/blob/master/android/OkycSdkHandler.java)
     - [OkycSdkHandlerCallback.java](https://github.com/deepvue-tech/deepvue-aadhaar-offline-ekyc-android-sdk/blob/master/android/OkycSdkHandlerCallback.java)
-6. Finally, Open up `android/app/src/main/java/[...]/MainApplication.java`
-    - Add `new OkycPackager()` to the list returned by the `getPackages()` method
-7. Copy `OkycSdkHandler.java` & `OkycSdkHandlerCallback.java` and paste it in your app alongside `MainApplication.java`
 
 ## Usage
 You can use below code to trigger SDK from your application on a button click or a similar event.
