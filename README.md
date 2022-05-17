@@ -1,151 +1,89 @@
 # Deepvue Aadhaar Offline e-KYC Android SDK
-![version](https://img.shields.io/badge/version-v0.5-blue)
 
 Aadhaar Paperless Offline eKYC is a secure and shareable document which can be used by any Aadhaar holder for offline verification of identification. The Aadhaar Offline document can be obtained from the UIDAI website. This SDK provides a simple plugin to your mobile App which allows the user to seamlessly share their offline Aadhaar file with the service provider. 
 
 The Aadhaar Offline file will be validated for its digital signature and the KYC data of The Aadhaar holder will be passed to the integrating App as JSON data.
 
+
 # Table Of Content
 
 - [Prerequisite](#prerequisite)
-- [Android SDK Requirements](#android-sdk-requirements)
-- [Download](#download)[Using maven repository](#using-maven-repository)
 - [Setup](#setup)
-- [Permissions](#permissions)
-- [Quick Start](#quick-start)
-- [Aadhar Offline Result](#handling-the-result)
+- [Usage](#usage)
 - [Failure Status Codes](#failure-status-codes)
 - [Help](#help)
 
 ## Prerequisite
 
-
-You will need valid credentials to use the Deepvue Aadhaar Offline e-KYC Android SDK, which can be obtained by contacting `hello@deepvue.tech` 
-
-
-## Android SDK Requirements
-
-**Minimum SDK Version** -  **19** or higher
-
-## Download
-
-#### Using maven repository
-
-Add the following code to your `project` level `build.gradle` file
-
-```groovy
-allprojects {
-
-    repositories {
-          maven { url 'https://jitpack.io' }
-    }
-
-}
-```
-
-After that, add the following code to your `app` level `build.gradle` file
-```groovy
-
-// ...
-
-dependencies {
-
-    /* Dependencies for Deepveu Aadhaar Offline SDK */
-    implementation 'androidx.appcompat:appcompat:<lastest verison>'
-    
-    implementation 'com.google.android.material:material:<lastest verison>'
-   
-    // Deepvue aadhar offline core dependency
-    implementation 'com.github.deepvue-tech:deepvue-aadhaar-offline-ekyc-android-sdk:<lastest verison>'
-   
-}
-```
+You will need valid credentials to use the Deepvue Aadhaar Offline e-KYC React Native SDK, which can be obtained by contacting `hello@deepvue.tech` 
 
 ## Setup
 
-#### Permissions
+#### Android
+1. Download our Android dependencies from [here](https://deepvue-public-storage.s3.ap-south-1.amazonaws.com/offline-aadhaar-ekyc/android/deepvue-okyc-android-plugin.zip).
 
-Deepvue Aadhaar Offline SDK requires the following permission to operate properly
+2. Extract above dependencies locally in your system.
 
-```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name" >
-
-    <uses-permission android:name="android.permission.INTERNET" />  
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />    
-    
-    <application>
-      ...
-    </application>
-
-</manifest>
+3. Add below Repositories in your `project.build.gradle`
 ```
-## Quick Start
-
-#### Initiating the Deepvue Aadhaar Offline SDK
-
-Initialize the `Deepvue Aadhaar Offline SDK` instance with the appropriate configurations to invoke the Deepvue Aadhaar Offline SDK
-
-
-```java
-public class MainActivity extends AppCompatActivity {
-
-    // ...
-    
-    /* (OPTIONAL)  Enter the DeepvueAadharOffline API credentials here */
-    private String DEEPVUE_AADHAR_OFFLINE_API_BASE_URL = "ENTER_BASE_URL_HERE"
-            , DEEPVUE_AADHAR_OFFLINE_CLIENT_ID = "ENTER_API_KEY_ID_HERE"
-            , DEEPVUE_AADHAR_OFFLINE_CLIENT_SEC = "ENTER_API_KEY_SEC_HERE";
-   
-    
-    private fun startKycWithoutFaceMatch() {
-        //for KYC without facematch
-        AadharOfflineSDK.initialiseSDK(
-            DEEPVUE_AADHAR_OFFLINE_API_BASE_URL,
-            DEEPVUE_AADHAR_OFFLINE_CLIENT_ID,
-            DEEPVUE_AADHAR_OFFLINE_CLIENT_SEC
-        ).setLanguage(AadharOfflineSDK.Languages.en)
-            .start(this@MainActivity, this)
-
+repositories {
+    maven {
+        url 'path to downloaded android dependencies' //e.g. '/home/user/Downloads/deepvue-okyc-android-plugin/repo'
     }
-
-    @SuppressLint("MissingPermission")
-    private fun startKycWithFaceMatch() {
-        // for KYC without facematch need camera(mandatory) and storage(below android 11) permission
-        AadharOfflineSDK.initialiseSDK(
-            DEEPVUE_AADHAR_OFFLINE_API_BASE_URL,
-            DEEPVUE_AADHAR_OFFLINE_CLIENT_ID,
-            DEEPVUE_AADHAR_OFFLINE_CLIENT_SEC
-        )
-            .setFaceMatch(true)
-            .setLanguage(AadharOfflineSDK.Languages.en)
-            .start(this@MainActivity, this)
-
+    maven {
+        url "https://storage.googleapis.com"
     }
-
-    // ...
-
+    ...
 }
 ```
-
-#### Handling the result
-
-Your activity must implement `onKycSuccessResult` and `onFailure` to receive the result.
-
-```java
-    // ...
-    override fun onFailure(errorCode:Int) {
-        Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onKycSuccessResult(result: UploadXMLResponse) {
-        Toast.makeText(this, "KYC Success: ${result.aadhaar.name}", Toast.LENGTH_SHORT).show()
-    }
-    // ...
+4. Add Dependency in your `app.build.gradle`
 ```
+dependencies {
+    implementation 'sdk.deepvue.tech.offline_aadhaar_ekyc:flutter_release:1.0'
+    ...
+}
+```
+5. Open you Manifest File and add below activity
+```
+<activity
+    android:name="io.flutter.embedding.android.FlutterActivity"
+    android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+    android:exported="true"
+    android:hardwareAccelerated="true"
+    android:theme="@style/Theme.AppCompat"
+    android:windowSoftInputMode="adjustResize">
+</activity>
+...
+```
+5. Copy below files and add to your `app` alongside `MainApplication.java` file
+    - [OkycSdkHandler.java](https://github.com/deepvue-tech/deepvue-aadhaar-offline-ekyc-android-sdk/blob/master/android/OkycSdkHandler.java)
+    - [OkycSdkHandlerCallback.java](https://github.com/deepvue-tech/deepvue-aadhaar-offline-ekyc-android-sdk/blob/master/android/OkycSdkHandlerCallback.java)
+6. Finally, Open up `android/app/src/main/java/[...]/MainApplication.java`
+    - Add `new OkycPackager()` to the list returned by the `getPackages()` method
+7. Copy `OkycSdkHandler.java` & `OkycSdkHandlerCallback.java` and paste it in your app alongside `MainApplication.java`
 
-## DeepvueAadharOfflineResult
-The result is obtained through the `result` object
+## Usage
+You can use below code to trigger SDK from your application on a button click or a similar event.
 
+```kotlin
+ OkycSdkHandler(
+                baseUrl = "base-url",
+                clientId = "client-id",
+                clientSecret = "client-secret",
+                useFaceMatch = true,
+                imageUrl = "image-url",
+                callback = object : Callback {
+                    override fun onFailure(code: Int) {
+                        // On Failure Code
+                    }
+
+                    override fun onSuccess(response: String) {
+                       // On Success Response
+                    }
+                }
+            ).startSdk(context)
+
+```
 ## Failure Status Codes
 Following error codes will be returned on the `onFailure` method of the callback
 
@@ -162,6 +100,7 @@ Following error codes will be returned on the `onFailure` method of the callback
 | 809  | File Upload Failed |
 | 810  | Face Match Failed            |
 | 404  | UIDAI Website Server Down            |
+
 
 ## Help
 For any queries/feedback, contact us at `hello@deepvue.tech` 
