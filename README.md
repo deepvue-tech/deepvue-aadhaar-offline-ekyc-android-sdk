@@ -82,6 +82,7 @@ You can use below code to trigger SDK from your application on a button click or
                     }
                 }
             ).startSdk(context)
+
 ```
 ## Failure Status Codes
 Following error codes will be returned on the `onFailure` method of the callback
