@@ -20,7 +20,7 @@ You will need valid credentials to use the Deepvue Aadhaar Offline e-KYC React N
 ## Setup
 
 #### Android
-1. Download our Android dependencies from [here](https://deepvue-public-storage.s3.ap-south-1.amazonaws.com/offline-aadhaar-ekyc/android/deepvue-okyc-android-plugin.zip).
+1. Download our Android dependencies from [here](https://deepvue-public-storage.s3.ap-south-1.amazonaws.com/offline-aadhaar-ekyc/android/v0.0.2/deepvue-okyc-android-plugin.zip).
 
 2. Extract above dependencies locally in your system.
 
@@ -39,7 +39,7 @@ repositories {
 4. Add Dependency in your `app.build.gradle`
 ```
 dependencies {
-    implementation 'sdk.deepvue.tech.offline_aadhaar_ekyc:flutter_release:1.0'
+    implementation 'sdk.deepvue.tech.offline_aadhaar_ekyc:flutter_release:0.0.2'
     ...
 }
 ```
